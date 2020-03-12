@@ -1,20 +1,40 @@
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx, w } from '@dojo/framework/core/vdom';
 import icache from '@dojo/framework/core/middleware/icache';
-
-import Home from './Home';
-import About from './About';
-import Profile from './Profile';
 
 const factory = create({ icache });
 
 export default factory(function App({ middleware: { icache } }) {
 	const view = icache.getOrSet<string>('view', 'home');
 
-	let mainView = <Home />;
+	let mainView = w(
+		{
+			label: 'home',
+			registryItem: () => {
+				return import('./Home');
+			}
+		},
+		{}
+	);
 	if (view === 'about') {
-		mainView = <About />;
+		mainView = w(
+			{
+				label: 'about',
+				registryItem: () => {
+					return import('./About');
+				}
+			},
+			{}
+		);
 	} else if (view === 'profile') {
-		mainView = <Profile />;
+		mainView = w(
+			{
+				label: 'profile',
+				registryItem: () => {
+					return import('./Profile');
+				}
+			},
+			{}
+		);
 	}
 
 	return (

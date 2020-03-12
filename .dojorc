@@ -1,9 +1,4 @@
 {
 	"build-app": {
-		"bundles": {
-			"home": ["src/Home"],
-			"about": ["src/About"],
-			"profile": ["src/Profile"]
-		}
 	}
 }
